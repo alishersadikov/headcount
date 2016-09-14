@@ -1,4 +1,4 @@
-require './lib/district'
+require_relative '../lib/district'
 require 'csv'
 
 class DistrictRepository
@@ -10,26 +10,23 @@ class DistrictRepository
   def load_data(file)
     filename = file[:enrollment][:kindergarten]
     contents = CSV.open filename, headers: true, header_converters: :symbol
-    contents.each do |row|
+    build_repository(contents)
+  end
+
+  def build_repository(contents)
+    contents.map do |row|
       @repo << District.new({ :name => row[:location] })
     end
-    return @repo
   end
 
   def find_by_name(name)
-    @repo.find { |district|  district.name == name }
+    @repo.find { |district|  district.name.include?(name.upcase) }
   end
 
   def find_all_matching(name)
-    @repo.find_all { |district|  district.name == name }
+    found = @repo.find_all do |district|
+      district if district.name.include?(name.upcase)
+     end
+     unique_names = found.map { |district|  district.name }.uniq
   end
 end
-
-# if __FILE__ == $0
-#   dr = DistrictRepository.new
-#   dr.load_data( { :graduation => { :kindergarten => "./data/Kindergartners in full-day program.csv",
-#                                     :high_school => "./data/Kindergartners in full-day program.csv"},
-#
-#                   :enrollment =>  { :kindergarten => "./data/Kindergartners in full-day program.csv",
-#                                     :high_school => "./data/Kindergartners in full-day program.csv"}} )
-# end

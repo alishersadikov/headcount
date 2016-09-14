@@ -1,5 +1,5 @@
-require "./test/test_helper"
-require "./lib/enrollment"
+require_relative "test_helper"
+require_relative "../lib/enrollment"
 
 class EnrollmentTest < Minitest::Test
 
@@ -14,5 +14,4 @@ class EnrollmentTest < Minitest::Test
    assert_equal "ACADEMY 20", e.name
    assert_equal result, e.kindergarten_participation
   end
-
 end
