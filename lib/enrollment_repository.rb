@@ -22,6 +22,8 @@ class EnrollmentRepository
     @repo.find { |enrollment|  enrollment.name.include?(district_name.upcase) }
   end
 
+  private
+
   def format_repo!
     grouped_repo = @repo.group_by { |enrollment| enrollment.name }
     @repo = grouped_repo.map do |name, enrollments|
