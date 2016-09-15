@@ -1,9 +1,11 @@
 require_relative '../lib/district'
 require_relative '../lib/enrollment_repository'
+require_relative '../lib/data_extractor'
 require 'csv'
 
 class DistrictRepository
-  attr_reader :repo, :enrollment_repo
+  attr_reader :repo,
+              :enrollment_repo
 
   def initialize
     @repo = []
@@ -11,10 +13,10 @@ class DistrictRepository
   end
 
   def load_data(data_hash)
-    filename = data_hash[:enrollment][:kindergarten]
-    contents = CSV.open filename, headers: true, header_converters: :symbol
+    contents = DataExtractor.extract_data(data_hash)
     build_repository(contents)
-    @enrollment_repo = @enrollment_repo.load_data(data_hash)
+    @enrollment_repo.load_data(data_hash)
+    link_enrollments_to_districts
   end
 
   def build_repository(contents)
@@ -27,12 +29,6 @@ class DistrictRepository
 
   def find_all_matching(name)
     @repo.find_all { |district|  district.name.include?(name.upcase) }
-
-
-    # found = @repo.find_all do |district|
-    #   district if district.name.include?(name.upcase)
-    #  end
-    #  unique_names = found.map { |district|  district.name }.uniq
   end
 
   private
@@ -41,5 +37,12 @@ class DistrictRepository
     @repo << District.new({ :name => name }) if !find_by_name(name)
   end
 
-
+  def link_enrollments_to_districts
+    @repo.each do |district|
+      district.enrollment = @enrollment_repo.find_by_name(district.name)
+      # district.enrollment = @enrollment_repo.repo.find do |enrollment|
+      #   enrollment.name == district.name
+      # end
+    end
+  end
 end

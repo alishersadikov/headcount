@@ -9,34 +9,27 @@ class DistrictRepositoryTest < Minitest::Test
 
     assert dr.repo.empty?
 
-    dr.load_data({
-      :enrollment => {
-        :kindergarten => "./data/Kindergartners in full-day program.csv"
-      }
-    })
+    dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
 
     refute dr.repo.empty?
   end
 
   def test_it_finds_by_district_name
     dr = DistrictRepository.new
-    dr.load_data({
-      :enrollment => {
-        :kindergarten => "./data/Kindergartners in full-day program.csv"
-      }
-    })
+
+    dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
+
     district = dr.find_by_name("ACADEMY 20")
+
     assert_equal "ACADEMY 20", district.name
     assert_equal nil, dr.find_by_name("Eric")
   end
 
   def test_it_finds_all_matching_districts
     dr = DistrictRepository.new
-    dr.load_data({
-      :enrollment => {
-        :kindergarten => "./data/Kindergartners in full-day program.csv"
-      }
-    })
+
+    dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
+
     districts = dr.find_all_matching("ACADEMY 20")
 
     assert_equal "ACADEMY 20", districts.first.name
@@ -48,34 +41,24 @@ class DistrictRepositoryTest < Minitest::Test
 
   def test_it_takes_district_snippet_and_returns_all_matching_districts
     dr = DistrictRepository.new
-    dr.load_data({
-      :enrollment => {
-        :kindergarten => "./data/Kindergartners in full-day program.csv"
-      }
-    })
+
+    dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
+
     districts = dr.find_all_matching("we")
 
     assert_equal "WELD COUNTY RE-1", districts.first.name
     assert_equal "WESTMINSTER 50", districts.last.name
     assert_equal 7, districts.count
-    end
+  end
 
-    def test_it_finds_by_district_name
-      dr = DistrictRepository.new
+  def test_it_extracts_kindergarted_participation_in_year_data
+    dr = DistrictRepository.new
 
-      dr.load_data({
-        :enrollment => {
-          :kindergarten => "./data/Kindergartners in full-day program.csv"
-        }
-        })
+    dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
 
-        er = dr.enrollment_repo
+    district = dr.find_by_name("ACADEMY 20")
 
-
-        district = dr.find_by_name("ACADEMY 20")
-        enrollment = er.find { |enrollment| enrollment.name == "ACADEMY 20"}
-
-        actual = enrollment.kindergarten_participation_in_year(2010)
-        assert_equal 0.436, actual
-    end
+    actual = district.enrollment.kindergarten_participation_in_year(2010)
+    assert_equal 0.436, actual
+  end
 end
