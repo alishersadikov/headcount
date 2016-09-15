@@ -2,28 +2,36 @@ require_relative 'test_helper'
 require_relative '../lib/headcount_analyst'
 
 class HeadcountAnalystTest < Minitest::Test
+  attr_reader :dr
 
-  def test_it_calculates_kindergarten_pariticipation_variation_between_district_and_state
-    dr = DistrictRepository.new
+  def setup
+    @dr = DistrictRepository.new
     dr.load_data({:enrollment => {:kindergarten => "./data/Kindergartners in full-day program.csv"}})
-
     ha = HeadcountAnalyst.new(dr)
+  end
+
+  def dr
+    @dr
+  end
+
+  def test_it_calculates_kindergarten_participation_variation_between_district_and_state
+
     actual = ha.kindergarten_participation_rate_variation('ACADEMY 20', :against => 'COLORADO')
 
     assert_equal 0.766, actual
   end
 
-  def test_it_calculates_kindergarten_pariticipation_variation_between_districts
+  def test_it_calculates_kindergarten_participation_variation_between_districts
     dr = DistrictRepository.new
     dr.load_data({:enrollment => {:kindergarten => "./data/Kindergartners in full-day program.csv"}})
 
     ha = HeadcountAnalyst.new(dr)
     actual = ha.kindergarten_participation_rate_variation('ACADEMY 20', :against => 'YUMA SCHOOL DISTRICT 1')
 
-    assert_equal 0.446, actual
+    assert_in_delta 0.447, actual, 0.005
   end
 
-  def test_it_calculates_kindergarten_pariticipation_variation_trend_against_state
+  def test_it_calculates_kindergarten_participation_variation_trend_against_state
     dr = DistrictRepository.new
     dr.load_data({:enrollment => {:kindergarten => "./data/Kindergartners in full-day program.csv"}})
     ha = HeadcountAnalyst.new(dr)

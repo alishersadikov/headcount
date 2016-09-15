@@ -41,9 +41,6 @@ class DistrictRepository
   def link_enrollments_to_districts
     @repo.each do |district|
       district.enrollment = @enrollment_repo.find_by_name(district.name)
-      # district.enrollment = @enrollment_repo.repo.find do |enrollment|
-      #   enrollment.name == district.name
-      # end
     end
   end
 end
