@@ -35,7 +35,7 @@ class HeadcountAnalyst
   end
 
   def extract_data(district_name)
-    @district_repo.enrollment_repo.find_by_name(district_name).kindergarten
+    @district_repo.enrollments.find_by_name(district_name).kindergarten
   end
 
 end

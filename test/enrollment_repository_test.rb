@@ -8,11 +8,12 @@ class EnrollmentRepositoryTest < Minitest::Test
   def test_it_loads_repository
     er = EnrollmentRepository.new
 
-    assert er.repo.empty?
+
+    assert er.enrollments.empty?
 
     er.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
 
-    refute er.repo.empty?
+    refute er.enrollments.empty?
   end
 
   def test_it_finds_by_district_name
@@ -26,6 +27,7 @@ class EnrollmentRepositoryTest < Minitest::Test
   end
 
   def test_it_finds_by_partial_district_name
+
     er = EnrollmentRepository.new
 
     er.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})

@@ -5,19 +5,21 @@ require_relative '../lib/scrubber'
 
 class EnrollmentRepository
   include Scrubber
-  attr_reader :repo
+  attr_reader :enrollments
 
   def initialize
-    @repo = []
+    @enrollments = {}
   end
 
   def load_data(data_hash)
     contents = DataExtractor.extract_data(data_hash)
     contents.map { |csv_files|  build_enrollments(csv_files) }
+    # binding.pry
   end
 
   def find_by_name(district_name)
-    @repo.find { |enrollment|  enrollment.name.include?(district_name.upcase) }
+        @enrollments[district_name.upcase]
+    # @enrollments.find { |enrollment|  enrollment.name.include?(district_name.upcase) }
   end
 
   private
@@ -32,10 +34,17 @@ class EnrollmentRepository
     enrollment = find_by_name(row[:location])
     attribute = csv_files[0]
     enrollment.send(attribute)[row[:timeframe].to_i] = truncate_number(row[:data].to_f)
+
+    # enrollment = find_by_name(row[:location])
+    # attribute = csv_files[0]
+    # enrollment.send(attribute)[row[:timeframe].to_i] = truncate_number(row[:data].to_f)
   end
 
   def create_new_enrollment(csv_files, row)
-    @repo << Enrollment.new( { :name => row[:location],
-                               csv_files[0] => { row[:timeframe].to_i => truncate_number(row[:data].to_f) } } )
+    @enrollments[row[:location].upcase] = Enrollment.new( { :name => row[:location],
+                                                      csv_files[0] => { row[:timeframe].to_i => truncate_number(row[:data].to_f) } } )
+    # @enrollments << Enrollment.new( { :name => row[:location],
+    #                            csv_files[0] => { row[:timeframe].to_i => truncate_number(row[:data].to_f) } } )
+
   end
 end
