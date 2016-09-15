@@ -1,3 +1,4 @@
+
 class Enrollment
   attr_reader :name,
               :kindergarten,
@@ -18,6 +19,6 @@ class Enrollment
   end
 
   def graduation_rate_by_year
-
+    high_school_graduation
   end
 end

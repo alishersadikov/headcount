@@ -13,14 +13,15 @@ class DistrictRepository
   end
 
   def load_data(data_hash)
-    contents = DataExtractor.extract_data(data_hash)
-    build_repository(contents)
+    csv_files = DataExtractor.extract_data(data_hash)
+    build_repo(csv_files[0])
     @enrollment_repo.load_data(data_hash)
     link_enrollments_to_districts
   end
 
-  def build_repository(contents)
-    contents.map { |row|  check_existence(row[:location]) }
+  def build_repo(csv_file)
+    kindergarten_data = csv_file[1]
+    kindergarten_data.map { |row|  check_existence(row[:location]) }
   end
 
   def find_by_name(name)
