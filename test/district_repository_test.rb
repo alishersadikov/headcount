@@ -15,7 +15,6 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def test_it_finds_by_district_name
-    skip
     dr = DistrictRepository.new
 
     dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
@@ -27,7 +26,6 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def test_it_finds_all_matching_districts
-    skip
     dr = DistrictRepository.new
 
     dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
@@ -42,7 +40,6 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def test_it_takes_district_snippet_and_returns_all_matching_districts
-    skip
     dr = DistrictRepository.new
 
     dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
@@ -55,7 +52,6 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def test_it_extracts_kindergarted_participation_in_year_data
-    skip
     dr = DistrictRepository.new
 
     dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})

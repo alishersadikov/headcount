@@ -4,17 +4,10 @@ require_relative '../lib/headcount_analyst'
 class HeadcountAnalystTest < Minitest::Test
   attr_reader :dr
 
-  def setup
-    @dr = DistrictRepository.new
+  def test_it_calculates_kindergarten_participation_variation_between_district_and_state
+    dr = DistrictRepository.new
     dr.load_data({:enrollment => {:kindergarten => "./data/Kindergartners in full-day program.csv"}})
     ha = HeadcountAnalyst.new(dr)
-  end
-
-  def dr
-    @dr
-  end
-
-  def test_it_calculates_kindergarten_participation_variation_between_district_and_state
 
     actual = ha.kindergarten_participation_rate_variation('ACADEMY 20', :against => 'COLORADO')
 
