@@ -14,6 +14,7 @@ class EnrollmentRepository
   def load_data(file_tree)
     contents = DataExtractor.extract_data(file_tree)
     contents.map { |csv_files|  build_enrollments(csv_files) }
+    binding.pry
   end
 
   def find_by_name(district_name)

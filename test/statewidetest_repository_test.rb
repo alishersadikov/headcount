@@ -1,18 +1,17 @@
 require_relative 'test_helper'
 require 'csv'
 require_relative '../lib/data_extractor'
-require_relative '../lib/scrubber'
 require_relative '../lib/statewidetest_repository'
 
 
 class StatewideTestRepositoryTest < Minitest::Test
+  attr_reader   :str
 
-  def test_it_loads_statewidetest_repository
+  def setup
+    @str = StatewideTestRepository.new
+  end
 
-    str = StatewideTestRepository.new
-
-    assert str.statewidetests.empty?
-
+  def load_data
     str.load_data({
       :statewide_testing => {
         :third_grade => "./data/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
@@ -21,8 +20,27 @@ class StatewideTestRepositoryTest < Minitest::Test
         :reading => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
         :writing => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
       }
-    })
+      })
+  end
+
+  def test_it_loads_statewidetest_repository
+
+    assert str.statewidetests.empty?
+
+    load_data
+
     refute str.statewidetests.empty?
   end
+
+  def test_it_finds_by_name
+
+    load_data
+
+    found = str.find_by_name("academy 20")
+
+    assert_equal "ACADEMY 20", found.name
+  end
+
+
 
 end

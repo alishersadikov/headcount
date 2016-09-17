@@ -11,6 +11,7 @@ module DataExtractor
   end
 
   def extract_path(data_hash)
-    data_hash[:statewide_testing]
+    return data_hash[:statewide_testing] if data_hash[:statewide_testing]
+    return data_hash[:enrollment] if data_hash[:enrollment]
   end
 end
