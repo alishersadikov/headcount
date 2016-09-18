@@ -39,7 +39,6 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def test_it_takes_district_snippet_and_returns_all_matching_districts
-
     dr = DistrictRepository.new
 
     dr.load_data({:enrollment => { :kindergarten => "./data/Kindergartners in full-day program.csv"}})
@@ -58,5 +57,26 @@ class DistrictRepositoryTest < Minitest::Test
 
     actual = district.enrollment.kindergarten_participation_in_year(2010)
     assert_equal 0.436, actual
+  end
+
+  def test_relationship_between_statewidetest_and_district
+    dr = DistrictRepository.new
+    dr.load_data({
+    :enrollment => {
+      :kindergarten => "./data/Kindergartners in full-day program.csv",
+      :high_school_graduation => "./data/High school graduation rates.csv",
+    },
+    :statewide_testing => {
+      :third_grade => "./data/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
+      :eighth_grade => "./data/8th grade students scoring proficient or above on the CSAP_TCAP.csv",
+      :math => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Math.csv",
+      :reading => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
+      :writing => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
+    }
+  })
+  district = dr.find_by_name("ACADEMY 20")
+  statewide_test = district.statewide_test
+
+  assert_equal "ACADEMY 20", district.statewide_test.name
   end
 end

@@ -5,9 +5,16 @@ module Scrubber
   end
 
   def clean_symbol(symbol)
-    if symbol.to_s.include?(" ")
-      symbol.to_s.downcase.gsub!(" ", "_").gsub!(/\W+/, '').to_sym
+    # binding.pry
+    if symbol.to_s.downcase == 'hawaiian/pacific islander'
+    symbol.to_s.downcase.split("/").last.gsub(" ", "_").gsub("`", "").to_sym
+    # binding.pry
     else
-      symbol.to_s.downcase.gsub!(/\W+/, '').to_sym
+    symbol.to_s.downcase.gsub(" ", "_").gsub("`", "").to_sym
+    # if symbol.to_s.include?(" ")
+    #   symbol.to_s.downcase.gsub(" ", "_").gsub(/\s+/, "").gsub("`", "").to_sym
+    # else
+    #   symbol.to_s.downcase.gsub(/\s+/, "").gsub("`", "").to_sym
+    end
   end
 end

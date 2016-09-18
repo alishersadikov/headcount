@@ -14,7 +14,6 @@ class EnrollmentRepository
   def load_data(file_tree)
     contents = DataExtractor.extract_data(file_tree)
     contents.map { |csv_files|  build_enrollments(csv_files) }
-    binding.pry
   end
 
   def find_by_name(district_name)
@@ -32,6 +31,9 @@ class EnrollmentRepository
   def fill_this_enrollment(csv_files, row)
     enrollment = find_by_name(row[:location])
     attribute = csv_files[0]
+    # if attribute == third_grade
+    #   binding.pry
+    # end
     enrollment.send(attribute)[row[:timeframe].to_i] = truncate_number(row[:data].to_f)
   end
 

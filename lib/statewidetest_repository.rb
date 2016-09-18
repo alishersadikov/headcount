@@ -1,5 +1,5 @@
 require 'csv'
-require_relative '../lib/statewidetest'
+require_relative '../lib/statewide_test'
 require_relative '../lib/data_extractor'
 require_relative '../lib/scrubber'
 
@@ -12,8 +12,8 @@ class StatewideTestRepository
   end
 
   def load_data(file_tree)
-    contents = DataExtractor.extract_data(file_tree)
-    contents.map { |csv_files|  build_statewidetests(csv_files) }
+    contents = DataExtractor.extract_data(file_tree[:statewide_testing])
+    contents.map { |csv_files|  build_statewidetests(csv_files)}
 
   end
 
@@ -45,16 +45,13 @@ class StatewideTestRepository
     # end
     score = row[:score] || row[:race_ethnicity] ||'blank'
     if !swt.send(attribute)[row[:timeframe].to_i].nil?
-        swt.send(attribute)[row[:timeframe].to_i].store(score.downcase.to_sym,truncate_number(row[:data].to_f))
+        swt.send(attribute)[row[:timeframe].to_i].store(clean_symbol(score).downcase.to_sym,truncate_number(row[:data].to_f))
     else
-      swt.send(attribute)[row[:timeframe].to_i] = {score.downcase.to_sym=>truncate_number(row[:data].to_f)}
+      swt.send(attribute)[row[:timeframe].to_i] = {clean_symbol(score).downcase.to_sym=>truncate_number(row[:data].to_f)}
     end
   end
 
-  def build_test_hash
 
-
-  end
   #
   #   statewidetest = find_by_name(row[:location])
   #   attribute = csv_files[0]
@@ -73,13 +70,8 @@ class StatewideTestRepository
   # end
 
   def create_new_statewidetest(csv_files, row)
-
-    #1st scenario is when I am reading data for 3rd grade and 8th grade
-    #2nd scenario is when I am reading data for specific subjects
-    score_or_race = row[:score] || row[:race_ethnicity]
-    @statewidetests[row[:location].upcase] = Statewidetest.new(
-    { :name => row[:location], csv_files[0]=> {row[:timeframe].to_i=>{score_or_race=>truncate_number(row[:data].to_f)}}} )
-
-      # {row[:timeframe].to_i=>{row[:score]=>truncate_number(row[:data].to_f)}}})
+    score_or_race = row[:score] || row[:race_ethnicity] || "blank"
+    @statewidetests[row[:location].upcase] = StatewideTest.new(
+    { :name => row[:location], csv_files[0]=> {row[:timeframe].to_i=>{clean_symbol(score_or_race)=>truncate_number(row[:data].to_f)}}} )
   end
 end

@@ -10,4 +10,8 @@ class District
   def enrollment
     district_repo.link_enrollments_to_districts(name)
   end
+
+  def statewide_test
+    district_repo.link_statewidetests_to_districts(name)
+  end
 end
