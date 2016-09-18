@@ -12,7 +12,7 @@ class EnrollmentRepository
   end
 
   def load_data(file_tree)
-    contents = DataExtractor.extract_data(file_tree)
+    contents = DataExtractor.extract_data(file_tree[:enrollment])
     contents.map { |csv_files|  build_enrollments(csv_files) }
   end
 

@@ -1,6 +1,6 @@
 require_relative '../lib/district'
 require_relative '../lib/enrollment_repository'
-require_relative '../lib/statewidetest_repository'
+require_relative '../lib/statewide_test_repository'
 require_relative '../lib/data_extractor'
 require 'csv'
 
@@ -16,11 +16,11 @@ class DistrictRepository
   end
 
   def load_data(file_tree)
+    # binding.pry
     csv_files = DataExtractor.extract_data(file_tree[:enrollment])
     build_repo(csv_files[0])
-    @enrollments.load_data(file_tree[:enrollment])
-    @statewidetests.load_data(file_tree)
-
+    @enrollments.load_data(file_tree)    if file_tree[:enrollment]
+    @statewidetests.load_data(file_tree) if file_tree[:statewide_testing]
   end
 
   def build_repo(csv_file)

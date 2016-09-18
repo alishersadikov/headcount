@@ -1,12 +1,15 @@
+require 'pry'
 
 class Enrollment
   attr_reader :name,
               :kindergarten,
               :high_school_graduation
 
+
   def initialize(enrollment_data)
     @name = enrollment_data[:name].upcase
-    @kindergarten = enrollment_data[:kindergarten] || {}
+    @kindergarten = enrollment_data[:kindergarten] ||
+      enrollment_data[:kindergarten_participation] || {}
     @high_school_graduation = enrollment_data[:high_school_graduation] || {}
   end
 

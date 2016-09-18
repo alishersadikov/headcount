@@ -46,6 +46,16 @@ class HeadcountAnalyst
     end
   end
 
+  def top_statewide_test_year_over_year_growth(grade, subject)
+    district_repo.statewidetests
+    binding.pry
+    # we need to iterate over district name and to get access to 3rd or 8th grade
+    # in our loop we might have find_by_name method and we can grab district grade data
+    # that way we can build a hash/array with all grade date
+  end
+
+
+
 
   private
 
