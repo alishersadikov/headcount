@@ -1,7 +1,17 @@
 class District
-  attr_reader :name
+  attr_reader   :name,
+                :district_repo
 
-  def initialize(district_data)
+  def initialize(district_data, district_repo = nil)
     @name = district_data[:name].upcase
+    @district_repo = district_repo
+  end
+
+  def enrollment
+    district_repo.link_enrollments_to_districts(name)
+  end
+
+  def statewide_test
+    district_repo.link_statewidetests_to_districts(name)
   end
 end

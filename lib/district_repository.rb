@@ -1,35 +1,52 @@
-require './lib/district'
+require_relative '../lib/district'
+require_relative '../lib/enrollment_repository'
+require_relative '../lib/statewide_test_repository'
+require_relative '../lib/data_extractor'
 require 'csv'
 
 class DistrictRepository
-  attr_reader :repo
+  attr_reader :districts,
+              :enrollments,
+              :statewidetests
+
   def initialize
-    @repo = []
+    @districts = {}
+    @enrollments = EnrollmentRepository.new
+    @statewidetests = StatewideTestRepository.new
   end
 
-  def load_data(file)
-    filename = file[:enrollment][:kindergarten]
-    contents = CSV.open filename, headers: true, header_converters: :symbol
-    contents.each do |row|
-      @repo << District.new({ :name => row[:location] })
-    end
-    return @repo
+  def load_data(file_tree)
+    # binding.pry
+    csv_files = DataExtractor.extract_data(file_tree[:enrollment])
+    build_repo(csv_files[0])
+    @enrollments.load_data(file_tree)    if file_tree[:enrollment]
+    @statewidetests.load_data(file_tree) if file_tree[:statewide_testing]
+  end
+
+  def build_repo(csv_file)
+    kindergarten_data = csv_file[1]
+    kindergarten_data.map { |row|  check_existence(row[:location]) }
   end
 
   def find_by_name(name)
-    @repo.find { |district|  district.name == name }
+    @districts[name]
   end
 
-  def find_all_matching(name)
-    @repo.find_all { |district|  district.name == name }
+  def find_all_matching(snippet)
+    @districts.select { |key, value| value if key.include?(snippet.upcase) }.values
+  end
+
+  def link_enrollments_to_districts(name)
+    enrollments.enrollments[name]
+  end
+
+  def link_statewidetests_to_districts(name)
+    statewidetests.statewidetests[name]
+  end
+
+  private
+
+  def check_existence(name)
+    @districts[name.upcase] = District.new({ name: name }, self) if !find_by_name(name)
   end
 end
-
-# if __FILE__ == $0
-#   dr = DistrictRepository.new
-#   dr.load_data( { :graduation => { :kindergarten => "./data/Kindergartners in full-day program.csv",
-#                                     :high_school => "./data/Kindergartners in full-day program.csv"},
-#
-#                   :enrollment =>  { :kindergarten => "./data/Kindergartners in full-day program.csv",
-#                                     :high_school => "./data/Kindergartners in full-day program.csv"}} )
-# end
