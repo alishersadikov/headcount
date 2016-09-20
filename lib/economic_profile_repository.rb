@@ -13,7 +13,6 @@ class EconomicProfileRepository
   def load_data(file_tree)
     contents = DataExtractor.extract_data(file_tree[:economic_profile])
     contents.map { |csv_objects|  build_economic_profiles(csv_objects) }
-    binding.pry
   end
 
   def find_by_name(district_name)
@@ -24,11 +23,11 @@ class EconomicProfileRepository
 
   def build_economic_profiles(csv_objects)
     csv_objects[1].map do |row|
-      if find_by_name(row[:location])
-         fill_this_economic_profile(csv_objects, row)
-      else
-        create_new_economic_profile(csv_objects, row)
-      end
+    if find_by_name(row[:location])
+       fill_this_economic_profile(csv_objects, row)
+    else
+      create_new_economic_profile(csv_objects, row)
+    end
     end
   end
 
@@ -40,8 +39,8 @@ class EconomicProfileRepository
     elsif attribute == :free_or_reduced_price_lunch
       fill_free_or_reduced_price_lunch(row)
     else
-      economic_profile = find_by_name(row[:location])
-      economic_profile.send(attribute)[row[:timeframe].to_i] = cleaned_data
+      ep = find_by_name(row[:location])
+      ep.send(attribute)[row[:timeframe].to_i] = cleaned_data
     end
   end
 
@@ -49,14 +48,14 @@ class EconomicProfileRepository
     attribute = :median_household_income
     cleaned_data = truncate_number(row[:data].to_f)
     year = create_array(row[:timeframe])
-    economic_profile = find_by_name(row[:location])
-    economic_profile.send(attribute)[year] = cleaned_data
+    ep = find_by_name(row[:location])
+    ep.send(attribute)[year] = cleaned_data
   end
 
   def fill_free_or_reduced_price_lunch(row)
     year = row[:timeframe].to_i
     attribute = :free_or_reduced_price_lunch
-    economic_profile = find_by_name(row[:location])
+    ep = find_by_name(row[:location])
     string = "Eligible for Free or Reduced Lunch"
     row[:poverty_level] == string ? percent_or_number(row,year,attribute) : nil
   end
@@ -71,21 +70,21 @@ class EconomicProfileRepository
 
   def fill_free_or_reduced_price_lunch_with_percent(row, year, attribute)
     cleaned_data = truncate_number(row[:data].to_f)
-    economic_profile = find_by_name(row[:location])
-    if economic_profile.send(attribute)[year].nil?
-      economic_profile.send(attribute)[year] = {:percentage=>cleaned_data}
+    ep = find_by_name(row[:location])
+    if ep.send(attribute)[year].nil?
+      ep.send(attribute)[year] = {:percentage=>cleaned_data}
     else
-      economic_profile.send(attribute)[year].store(:percentage, cleaned_data)
+      ep.send(attribute)[year].store(:percentage, cleaned_data)
     end
   end
 
   def fill_free_or_reduced_price_lunch_with_number(row, year, attribute)
     cleaned_data = truncate_number(row[:data].to_f)
-    economic_profile = find_by_name(row[:location])
-    if economic_profile.send(attribute)[year].nil?
-      economic_profile.send(attribute)[year] = {:total=>row[:data].to_i}
+    ep = find_by_name(row[:location])
+    if ep.send(attribute)[year].nil?
+      ep.send(attribute)[year] = {:total=>row[:data].to_i}
     else
-      economic_profile.send(attribute)[year].store(:total, row[:data].to_i)
+      ep.send(attribute)[year].store(:total, row[:data].to_i)
     end
   end
 
@@ -94,7 +93,7 @@ class EconomicProfileRepository
     year = median_household_income_or_else(row, attribute)
     cleaned_data = truncate_number(row[:data].to_f)
     @economic_profiles[row[:location].upcase] = EconomicProfile.new( {
-      :name => row[:location], attribute=>{year=>cleaned_data}})
+      :name => row[:location].upcase, attribute=>{year=>cleaned_data}})
   end
 
   def median_household_income_or_else(row, attribute)

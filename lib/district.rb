@@ -14,4 +14,8 @@ class District
   def statewide_test
     district_repo.link_statewidetests_to_districts(name)
   end
+
+  def economic_profile
+    district_repo.link_economic_profiles_to_districts(name)
+  end
 end

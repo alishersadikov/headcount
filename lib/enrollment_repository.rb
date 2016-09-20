@@ -31,9 +31,6 @@ class EnrollmentRepository
   def fill_this_enrollment(csv_files, row)
     enrollment = find_by_name(row[:location])
     attribute = csv_files[0]
-    # if attribute == third_grade
-    #   binding.pry
-    # end
     enrollment.send(attribute)[row[:timeframe].to_i] = truncate_number(row[:data].to_f)
   end
 
