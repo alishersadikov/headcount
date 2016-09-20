@@ -46,16 +46,57 @@ class HeadcountAnalyst
     end
   end
 
-  def top_statewide_test_year_over_year_growth(grade, subject)
-    district_repo.statewidetests
-    binding.pry
-    # we need to iterate over district name and to get access to 3rd or 8th grade
-    # in our loop we might have find_by_name method and we can grab district grade data
-    # that way we can build a hash/array with all grade date
+  def top_statewide_test_year_over_year_growth(input_hash)
+    grade = input_hash[:grade]
+    subject = input_hash[:subject]
+    # binding.pry
+    # grade == 3 ? grade = "third_grade" : grade = "eighth_grade"
+    grade_repo = district_repo.statewidetests.statewidetests.map do |name, district|
+      [name, calculate_year_over_year_growth(district, subject, grade)]
+    end
+    # binding.pry
+    sorted_repo = grade_repo.max_by do |district|
+      district[1]
+    end
   end
 
+  def calculate_year_over_year_growth(swt, subject, grade)
+    first_array = get_the_earliest_value(swt, subject, grade)
+    last_array = get_the_latest_value(swt, subject, grade)
+    first_year = first_array[1]
+    last_year = last_array[1]
+    first = first_array[0]
+    last = last_array[0]
+    if (last_year - first_year) != 0.0
+      # binding.pry
+      total_growth = truncate_number((last - first)/ (last_year - first_year))
+    else
+      total_growth = truncate_number(last - first)
+    end
+  end
 
+  def get_the_earliest_value(swt, subject, grade)
+    first_year = 2007
+    first = 0.0
+    until first != 0.0
+      first_year += 1
+      first = swt.proficient_for_subject_by_grade_in_year(subject, grade, first_year).to_f
+      break if first_year == 2014
+    end
+    [first, first_year]
+  end
 
+  def get_the_latest_value(swt, subject, grade)
+    last_year = 2015
+    last = 0.0
+    until last != 0.0
+      last_year -= 1
+      last = swt.proficient_for_subject_by_grade_in_year(subject, grade, last_year).to_f
+      # binding.pry if swt.name == "COTOPAXI RE-3"
+      break if last_year == 2008
+    end
+    [last, last_year]
+  end
 
   private
 

@@ -95,7 +95,7 @@ class HeadcountAnalystTest < Minitest::Test
     refute actual
   end
 
-  def test_it_finds_top_district_for_year_over_year_growth
+  def test_it_extracts_top_statewide_test_year_over_year_growth
     dr = DistrictRepository.new
     dr.load_data({
             :enrollment => {
@@ -113,8 +113,13 @@ class HeadcountAnalystTest < Minitest::Test
 
     ha = HeadcountAnalyst.new(dr)
 
-    actual = ha.top_statewide_test_year_over_year_growth(3, :math)
-    assert_equal "WILEY RE-13 JT", actual
+    # actual = ha.top_statewide_test_year_over_year_growth(grade: 3, subject: :math)
+    # assert_equal "WILEY RE-13 JT", actual.first
+    assert_equal "COTOPAXI RE-3", ha.top_statewide_test_year_over_year_growth(grade: 8, subject: :reading).first
+    assert_in_delta 0.13, ha.top_statewide_test_year_over_year_growth(grade: 8, subject: :reading).last, 0.005
+    assert_equal "BETHUNE R-5", ha.top_statewide_test_year_over_year_growth(grade: 3, subject: :writing).first
+    assert_in_delta 0.148, ha.top_statewide_test_year_over_year_growth(grade: 3, subject: :writing).last, 0.005
+
   end
 
   # account for an edge case where non-existent district_name is given

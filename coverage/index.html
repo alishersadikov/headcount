@@ -14,27 +14,27 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-09-18T15:40:38-06:00">2016-09-18T15:40:38-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-09-19T18:21:10-06:00">2016-09-19T18:21:10-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">85.12%</span></span>
+    (<span class="covered_percent"><span class="yellow">88.64%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2590.42
+         2427.85
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>10</b> files in total.
-    <b>242</b> relevant lines. 
-    <span class="green"><b>206</b> lines covered</span> and
-    <span class="red"><b>36</b> lines missed </span>
+    <b>273</b> relevant lines. 
+    <span class="green"><b>242</b> lines covered</span> and
+    <span class="red"><b>31</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -113,31 +113,31 @@
       <tr>
         <td class="strong"><a href="#d7b121f1b3ba3edd475236534d84a0f225768e42" class="src_link" title="lib/headcount_analyst.rb">lib/headcount_analyst.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>85</td>
-        <td>52</td>
-        <td>52</td>
+        <td>126</td>
+        <td>82</td>
+        <td>82</td>
         <td>0</td>
-        <td>102.2</td>
+        <td>331.9</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#ac2cac6d26e96cd44847faf95b12f1bf401bea4e" class="src_link" title="lib/scrubber.rb">lib/scrubber.rb</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>20</td>
-        <td>7</td>
-        <td>7</td>
-        <td>0</td>
-        <td>13789.6</td>
+        <td class="red strong">80.0 %</td>
+        <td>25</td>
+        <td>10</td>
+        <td>8</td>
+        <td>2</td>
+        <td>9725.2</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#aee6b9a027582b1020f29f1c848e95907330d2e2" class="src_link" title="lib/statewide_test.rb">lib/statewide_test.rb</a></td>
-        <td class="red strong">42.86 %</td>
-        <td>85</td>
-        <td>49</td>
+        <td class="red strong">55.32 %</td>
+        <td>84</td>
+        <td>47</td>
+        <td>26</td>
         <td>21</td>
-        <td>28</td>
-        <td>22.5</td>
+        <td>306.4</td>
       </tr>
       
       <tr>
@@ -147,7 +147,7 @@
         <td>46</td>
         <td>46</td>
         <td>0</td>
-        <td>7583.2</td>
+        <td>7583.1</td>
       </tr>
       
     </tbody>
@@ -1305,8 +1305,8 @@
     <h3>lib/headcount_analyst.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>52</b> relevant lines. 
-      <span class="green"><b>52</b> lines covered</span> and
+      <b>82</b> relevant lines. 
+      <span class="green"><b>82</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -1605,220 +1605,466 @@
         <li class="covered" data-hits="1" data-linenumber="49">
           <span class="hits">1</span>
           
-          <code class="ruby">  def top_statewide_test_year_over_year_growth(grade, subject)</code>
+          <code class="ruby">  def top_statewide_test_year_over_year_growth(input_hash)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="50">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="4" data-linenumber="50">
+          <span class="hits">4</span>
           
-          <code class="ruby">    district_repo.statewidetests</code>
+          <code class="ruby">    grade = input_hash[:grade]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="51">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="4" data-linenumber="51">
+          <span class="hits">4</span>
           
-          <code class="ruby">    binding.pry</code>
+          <code class="ruby">    subject = input_hash[:subject]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="52">
           
           
-          <code class="ruby">    # we need to iterate over district name and to get access to 3rd or 8th grade</code>
+          <code class="ruby">    # binding.pry</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="53">
           
           
-          <code class="ruby">    # in our loop we might have find_by_name method and we can grab district grade data</code>
+          <code class="ruby">    # grade == 3 ? grade = &quot;third_grade&quot; : grade = &quot;eighth_grade&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="54">
+        <li class="covered" data-hits="4" data-linenumber="54">
+          <span class="hits">4</span>
           
-          
-          <code class="ruby">    # that way we can build a hash/array with all grade date</code>
+          <code class="ruby">    grade_repo = district_repo.statewidetests.statewidetests.map do |name, district|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="covered" data-hits="724" data-linenumber="55">
+          <span class="hits">724</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">      [name, calculate_year_over_year_growth(district, subject, grade)]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="56">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="57">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="57">
           
-          <code class="ruby"></code>
+          
+          <code class="ruby">    # binding.pry</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="58">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="59">
-          <span class="hits">1</span>
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="60">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  private</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="61">
+        <li class="covered" data-hits="4" data-linenumber="58">
           <span class="hits">4</span>
           
-          <code class="ruby"></code>
+          <code class="ruby">    sorted_repo = grade_repo.max_by do |district|</code>
+        </li>
+      
+        <li class="covered" data-hits="724" data-linenumber="59">
+          <span class="hits">724</span>
+          
+          <code class="ruby">      district[1]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="60">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="61">
+          
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="62">
           
           
-          <code class="ruby">  def correlation_across_multiple_districts(districts)</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="63">
           <span class="hits">1</span>
           
-          <code class="ruby">    district_correlations = districts.map do |district|</code>
+          <code class="ruby">  def calculate_year_over_year_growth(swt, subject, grade)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="covered" data-hits="724" data-linenumber="64">
+          <span class="hits">724</span>
           
-          
-          <code class="ruby">      kindergarten_participation_correlates_with_high_school_graduation(for: district)</code>
+          <code class="ruby">    first_array = get_the_earliest_value(swt, subject, grade)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="covered" data-hits="724" data-linenumber="65">
+          <span class="hits">724</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">    last_array = get_the_latest_value(swt, subject, grade)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="66">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="724" data-linenumber="66">
+          <span class="hits">724</span>
           
-          <code class="ruby">    district_correlations.count(true).to_f / district_correlations.count &gt; 0.70</code>
+          <code class="ruby">    first_year = first_array[1]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="67">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="724" data-linenumber="67">
+          <span class="hits">724</span>
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    last_year = last_array[1]</code>
         </li>
       
-        <li class="covered" data-hits="181" data-linenumber="68">
-          <span class="hits">181</span>
+        <li class="covered" data-hits="724" data-linenumber="68">
+          <span class="hits">724</span>
           
-          <code class="ruby"></code>
+          <code class="ruby">    first = first_array[0]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="69">
+        <li class="covered" data-hits="724" data-linenumber="69">
+          <span class="hits">724</span>
           
-          
-          <code class="ruby">  def calculate_statewide_correlation</code>
+          <code class="ruby">    last = last_array[0]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="70">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="724" data-linenumber="70">
+          <span class="hits">724</span>
           
-          <code class="ruby">    district_correlations = district_repo.districts.map do |name, district|</code>
+          <code class="ruby">    if (last_year - first_year) != 0.0</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="71">
           
           
-          <code class="ruby">      kindergarten_participation_correlates_with_high_school_graduation(for: name)</code>
+          <code class="ruby">      # binding.pry</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="covered" data-hits="698" data-linenumber="72">
+          <span class="hits">698</span>
+          
+          <code class="ruby">      total_growth = truncate_number((last - first)/ (last_year - first_year))</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="73">
+          
+          
+          <code class="ruby">    else</code>
+        </li>
+      
+        <li class="covered" data-hits="26" data-linenumber="74">
+          <span class="hits">26</span>
+          
+          <code class="ruby">      total_growth = truncate_number(last - first)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="75">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="73">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="76">
           
-          <code class="ruby">    district_correlations.count(true).to_f / district_correlations.count &gt; 0.70</code>
-        </li>
-      
-        <li class="covered" data-hits="752" data-linenumber="74">
-          <span class="hits">752</span>
           
           <code class="ruby">  end</code>
-        </li>
-      
-        <li class="covered" data-hits="752" data-linenumber="75">
-          <span class="hits">752</span>
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="752" data-linenumber="76">
-          <span class="hits">752</span>
-          
-          <code class="ruby">  def calculate_average(district_name, attribute)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="77">
           
           
-          <code class="ruby">    data = extract_data(district_name, attribute).values</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="78">
-          
-          
-          <code class="ruby">    average = data.inject(:+)/data.size</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="79">
+        <li class="covered" data-hits="1" data-linenumber="78">
           <span class="hits">1</span>
           
-          <code class="ruby">    truncate_number(average)</code>
+          <code class="ruby">  def get_the_earliest_value(swt, subject, grade)</code>
         </li>
       
-        <li class="covered" data-hits="754" data-linenumber="80">
-          <span class="hits">754</span>
+        <li class="covered" data-hits="724" data-linenumber="79">
+          <span class="hits">724</span>
+          
+          <code class="ruby">    first_year = 2007</code>
+        </li>
+      
+        <li class="covered" data-hits="724" data-linenumber="80">
+          <span class="hits">724</span>
+          
+          <code class="ruby">    first = 0.0</code>
+        </li>
+      
+        <li class="covered" data-hits="724" data-linenumber="81">
+          <span class="hits">724</span>
+          
+          <code class="ruby">    until first != 0.0</code>
+        </li>
+      
+        <li class="covered" data-hits="1352" data-linenumber="82">
+          <span class="hits">1352</span>
+          
+          <code class="ruby">      first_year += 1</code>
+        </li>
+      
+        <li class="covered" data-hits="1352" data-linenumber="83">
+          <span class="hits">1352</span>
+          
+          <code class="ruby">      first = swt.proficient_for_subject_by_grade_in_year(subject, grade, first_year)</code>
+        </li>
+      
+        <li class="covered" data-hits="1352" data-linenumber="84">
+          <span class="hits">1352</span>
+          
+          <code class="ruby">      break if first_year == 2014</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="85">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="724" data-linenumber="86">
+          <span class="hits">724</span>
+          
+          <code class="ruby">    [first, first_year]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="87">
+          
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="81">
+        <li class="never" data-hits="" data-linenumber="88">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="82">
+        <li class="covered" data-hits="1" data-linenumber="89">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  def extract_data(district_name, attribute)</code>
+          <code class="ruby">  def get_the_latest_value(swt, subject, grade)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="83">
+        <li class="covered" data-hits="724" data-linenumber="90">
+          <span class="hits">724</span>
           
-          
-          <code class="ruby">    district_repo.enrollments.find_by_name(district_name).send(attribute)</code>
+          <code class="ruby">    last_year = 2015</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="84">
+        <li class="covered" data-hits="724" data-linenumber="91">
+          <span class="hits">724</span>
+          
+          <code class="ruby">    last = 0.0</code>
+        </li>
+      
+        <li class="covered" data-hits="724" data-linenumber="92">
+          <span class="hits">724</span>
+          
+          <code class="ruby">    until last != 0.0</code>
+        </li>
+      
+        <li class="covered" data-hits="1600" data-linenumber="93">
+          <span class="hits">1600</span>
+          
+          <code class="ruby">      last_year -= 1</code>
+        </li>
+      
+        <li class="covered" data-hits="1600" data-linenumber="94">
+          <span class="hits">1600</span>
+          
+          <code class="ruby">      last = swt.proficient_for_subject_by_grade_in_year(subject, grade, last_year)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="95">
+          
+          
+          <code class="ruby">      # binding.pry if swt.name == &quot;COTOPAXI RE-3&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1600" data-linenumber="96">
+          <span class="hits">1600</span>
+          
+          <code class="ruby">      break if last_year == 2008</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="97">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="724" data-linenumber="98">
+          <span class="hits">724</span>
+          
+          <code class="ruby">    [last, last_year]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="99">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="85">
+        <li class="never" data-hits="" data-linenumber="100">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="101">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="102">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="103">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def correlation_across_multiple_districts(districts)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="104">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    district_correlations = districts.map do |district|</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="105">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      kindergarten_participation_correlates_with_high_school_graduation(for: district)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="106">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="107">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    district_correlations.count(true).to_f / district_correlations.count &gt; 0.70</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="108">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="109">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="110">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def calculate_statewide_correlation</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="111">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    district_correlations = district_repo.districts.map do |name, district|</code>
+        </li>
+      
+        <li class="covered" data-hits="181" data-linenumber="112">
+          <span class="hits">181</span>
+          
+          <code class="ruby">      kindergarten_participation_correlates_with_high_school_graduation(for: name)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="113">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="114">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    district_correlations.count(true).to_f / district_correlations.count &gt; 0.70</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="115">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="116">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="117">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def calculate_average(district_name, attribute)</code>
+        </li>
+      
+        <li class="covered" data-hits="752" data-linenumber="118">
+          <span class="hits">752</span>
+          
+          <code class="ruby">    data = extract_data(district_name, attribute).values</code>
+        </li>
+      
+        <li class="covered" data-hits="752" data-linenumber="119">
+          <span class="hits">752</span>
+          
+          <code class="ruby">    average = data.inject(:+)/data.size</code>
+        </li>
+      
+        <li class="covered" data-hits="752" data-linenumber="120">
+          <span class="hits">752</span>
+          
+          <code class="ruby">    truncate_number(average)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="121">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="122">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="123">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def extract_data(district_name, attribute)</code>
+        </li>
+      
+        <li class="covered" data-hits="754" data-linenumber="124">
+          <span class="hits">754</span>
+          
+          <code class="ruby">    district_repo.enrollments.find_by_name(district_name).send(attribute)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="125">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="126">
           
           
           <code class="ruby">end</code>
@@ -1831,11 +2077,11 @@
         <div class="source_table" id="ac2cac6d26e96cd44847faf95b12f1bf401bea4e">
   <div class="header">
     <h3>lib/scrubber.rb</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="red">80.0 %</span> covered</h4>
     <div>
-      <b>7</b> relevant lines. 
-      <span class="green"><b>7</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>10</b> relevant lines. 
+      <span class="green"><b>8</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
     </div>
   </div>
   
@@ -1860,8 +2106,8 @@
           <code class="ruby">  def truncate_number(number)</code>
         </li>
       
-        <li class="covered" data-hits="46568" data-linenumber="4">
-          <span class="hits">46568</span>
+        <li class="covered" data-hits="47292" data-linenumber="4">
+          <span class="hits">47292</span>
           
           <code class="ruby">    (number * 1000).floor / 1000.0</code>
         </li>
@@ -1959,6 +2205,36 @@
         <li class="never" data-hits="" data-linenumber="20">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def create_array(string)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="22">
+          
+          
+          <code class="ruby">    strings = string.split(&quot;-&quot;)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="23">
+          
+          
+          <code class="ruby">    integers = strings.map { |string|  string.to_i }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="24">
+          
+          
+          <code class="ruby">  end </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
           <code class="ruby">end</code>
         </li>
       
@@ -1969,11 +2245,11 @@
         <div class="source_table" id="aee6b9a027582b1020f29f1c848e95907330d2e2">
   <div class="header">
     <h3>lib/statewide_test.rb</h3>
-    <h4><span class="red">42.86 %</span> covered</h4>
+    <h4><span class="red">55.32 %</span> covered</h4>
     <div>
-      <b>49</b> relevant lines. 
-      <span class="green"><b>21</b> lines covered</span> and
-      <span class="red"><b>28</b> lines missed.</span>
+      <b>47</b> relevant lines. 
+      <span class="green"><b>26</b> lines covered</span> and
+      <span class="red"><b>21</b> lines missed.</span>
     </div>
   </div>
   
@@ -2136,20 +2412,20 @@
           <code class="ruby">  def proficient_by_grade(grade)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="27">
-          
+        <li class="covered" data-hits="2952" data-linenumber="27">
+          <span class="hits">2952</span>
           
           <code class="ruby">    raise UnknownDataError unless GRADES.include?(grade)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="28">
-          
+        <li class="covered" data-hits="2952" data-linenumber="28">
+          <span class="hits">2952</span>
           
           <code class="ruby">    return third_grade  if grade == 3</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="29">
-          
+        <li class="covered" data-hits="1490" data-linenumber="29">
+          <span class="hits">1490</span>
           
           <code class="ruby">    return eighth_grade if grade == 8</code>
         </li>
@@ -2226,265 +2502,259 @@
           <code class="ruby">  def proficient_for_subject_by_grade_in_year(subject, grade, year)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="42">
-          
+        <li class="covered" data-hits="2952" data-linenumber="42">
+          <span class="hits">2952</span>
           
           <code class="ruby">   raise UnknownDataError unless SUBJECTS.include?(subject)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="43">
-          
+        <li class="covered" data-hits="2952" data-linenumber="43">
+          <span class="hits">2952</span>
           
           <code class="ruby">   output = proficient_by_grade(grade)[year][subject]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="44">
+        <li class="never" data-hits="" data-linenumber="44">
           
           
-          <code class="ruby">   return output if output != 0.0</code>
+          <code class="ruby">  #  binding.pry</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="45">
+        <li class="never" data-hits="" data-linenumber="45">
           
           
-          <code class="ruby">   &quot;N/A&quot;</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="46">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="47">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="48">
+        <li class="covered" data-hits="1" data-linenumber="47">
           <span class="hits">1</span>
           
           <code class="ruby">  def proficient_for_subject_by_race_in_year(subject, race, year)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="49">
+        <li class="missed" data-hits="0" data-linenumber="48">
           
           
           <code class="ruby">    raise UnknownDataError unless SUBJECTS.include?(subject)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="50">
+        <li class="missed" data-hits="0" data-linenumber="49">
           
           
           <code class="ruby">    raise UnknownDataError unless RACES.include?(race)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="51">
+        <li class="missed" data-hits="0" data-linenumber="50">
           
           
           <code class="ruby">    proficient_by_race_or_ethnicity(race)[year][subject]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="52">
+        <li class="never" data-hits="" data-linenumber="51">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="53">
+        <li class="never" data-hits="" data-linenumber="52">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="54">
+        <li class="covered" data-hits="1" data-linenumber="53">
           <span class="hits">1</span>
           
           <code class="ruby">  private</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="never" data-hits="" data-linenumber="54">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="56">
+        <li class="covered" data-hits="1" data-linenumber="55">
           <span class="hits">1</span>
           
           <code class="ruby">  def extract_race_data_for_math(race, race_hash)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="57">
+        <li class="missed" data-hits="0" data-linenumber="56">
           
           
           <code class="ruby">    math.each do |year, race_to_score|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="58">
+        <li class="missed" data-hits="0" data-linenumber="57">
           
           
           <code class="ruby">      if race_hash[year].nil?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="59">
+        <li class="missed" data-hits="0" data-linenumber="58">
           
           
           <code class="ruby">        race_hash[year] = {math: race_to_score[race]}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="60">
+        <li class="never" data-hits="" data-linenumber="59">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="61">
+        <li class="missed" data-hits="0" data-linenumber="60">
           
           
           <code class="ruby">       race_hash[year].store(:math, race_to_score[race])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="62">
+        <li class="never" data-hits="" data-linenumber="61">
           
           
           <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="62">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="63">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="64">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="65">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="66">
+        <li class="covered" data-hits="1" data-linenumber="65">
           <span class="hits">1</span>
           
           <code class="ruby">  def extract_race_data_for_reading(race, race_hash)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="67">
+        <li class="missed" data-hits="0" data-linenumber="66">
           
           
           <code class="ruby">    reading.each do |year, race_to_score|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="68">
+        <li class="missed" data-hits="0" data-linenumber="67">
           
           
           <code class="ruby">      if race_hash[year].nil?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="69">
+        <li class="missed" data-hits="0" data-linenumber="68">
           
           
           <code class="ruby">        race_hash[year] = {reading: race_to_score[race]}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="70">
+        <li class="never" data-hits="" data-linenumber="69">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="71">
+        <li class="missed" data-hits="0" data-linenumber="70">
           
           
           <code class="ruby">        race_hash[year].store(:reading, race_to_score[race])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="never" data-hits="" data-linenumber="71">
           
           
           <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="73">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="74">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="75">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="76">
+        <li class="covered" data-hits="1" data-linenumber="75">
           <span class="hits">1</span>
           
           <code class="ruby">  def extract_race_data_for_writing(race, race_hash)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="77">
+        <li class="missed" data-hits="0" data-linenumber="76">
           
           
           <code class="ruby">    writing.each do |year, race_to_score|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="78">
+        <li class="missed" data-hits="0" data-linenumber="77">
           
           
           <code class="ruby">      if race_hash[year].nil?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="79">
+        <li class="missed" data-hits="0" data-linenumber="78">
           
           
           <code class="ruby">        race_hash[year] = {writing: race_to_score[race]}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="80">
+        <li class="never" data-hits="" data-linenumber="79">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="81">
+        <li class="missed" data-hits="0" data-linenumber="80">
           
           
           <code class="ruby">        race_hash[year].store(:writing, race_to_score[race])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="82">
+        <li class="never" data-hits="" data-linenumber="81">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="83">
+        <li class="never" data-hits="" data-linenumber="82">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="84">
+        <li class="never" data-hits="" data-linenumber="83">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="85">
+        <li class="never" data-hits="" data-linenumber="84">
           
           
           <code class="ruby">end</code>
@@ -2622,8 +2892,8 @@
           <code class="ruby">  def find_by_name(district_name)</code>
         </li>
       
-        <li class="covered" data-hits="49777" data-linenumber="20">
-          <span class="hits">49777</span>
+        <li class="covered" data-hits="49775" data-linenumber="20">
+          <span class="hits">49775</span>
           
           <code class="ruby">    statewidetests[district_name.upcase]</code>
         </li>

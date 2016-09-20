@@ -17,4 +17,9 @@ module Scrubber
     #   symbol.to_s.downcase.gsub(/\s+/, "").gsub("`", "").to_sym
     end
   end
+
+  def create_array(string)
+    strings = string.split("-")
+    integers = strings.map { |string|  string.to_i }
+  end 
 end
