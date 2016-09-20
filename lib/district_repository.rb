@@ -1,18 +1,21 @@
 require_relative '../lib/district'
 require_relative '../lib/enrollment_repository'
 require_relative '../lib/statewide_test_repository'
+require_relative '../lib/economic_profile_repository'
 require_relative '../lib/data_extractor'
 require 'csv'
 
 class DistrictRepository
   attr_reader :districts,
               :enrollments,
-              :statewidetests
+              :statewidetests,
+              :economic_profiles
 
   def initialize
-    @districts = {}
-    @enrollments = EnrollmentRepository.new
-    @statewidetests = StatewideTestRepository.new
+    @districts         = {}
+    @enrollments       = EnrollmentRepository.new
+    @statewidetests    = StatewideTestRepository.new
+    @economic_profiles = EconomicProfileRepository.new
   end
 
   def load_data(file_tree)
@@ -42,6 +45,10 @@ class DistrictRepository
 
   def link_statewidetests_to_districts(name)
     statewidetests.statewidetests[name]
+  end
+
+  def link_economic_profiles_to_districts(name)
+    economic_profiles.economic_profiles[name]
   end
 
   private
