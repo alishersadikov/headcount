@@ -1,8 +1,13 @@
 require_relative "../lib/district_repository"
-require_relative '../lib/scrubber'
+require_relative '../lib/cleaner'
+require_relative '../lib/errors'
 
 class HeadcountAnalyst
-  include Scrubber
+
+  GRADES   = [3, 8]
+  SUBJECTS = [:math, :reading, :writing]
+
+  include Cleaner
   attr_reader :district_repo
 
   def initialize(district_repo)
@@ -39,9 +44,10 @@ class HeadcountAnalyst
     calculate_different_correlations(district_name, param)
   end
 
-
   def top_statewide_test_year_over_year_growth(input_hash)
     grade = input_hash[:grade]
+    raise InsufficientInformationError if grade.nil?
+    raise UnknownDataError.new.message unless GRADES.include?(grade)
     subject = input_hash[:subject] if !input_hash[:subject].nil?
     return top_statewide_all_subjects(input_hash) if input_hash[:subject].nil?
     sorted_grades = build_grades_repo_and_sort(subject, grade)
@@ -79,7 +85,7 @@ class HeadcountAnalyst
   def build_grades_repo_and_sort(subject, grade)
     grades = district_repo.statewidetests.statewidetests.map { |name, district|
       [name, calculate_year_over_year_growth(district, subject, grade)] }
-      sorted_grades = grades.sort_by { |district|  district[1] }.reverse
+    grades.sort_by { |district|  district[1] }.reverse
   end
 
   def top_statewide_all_subjects(input_hash)
@@ -120,7 +126,7 @@ class HeadcountAnalyst
       ((data[0] * weights[0] + data[1] *  weights[1] +
       data[2] * weights[2])/data.size).round(3)
     end
-    districts = names.zip(averages)
+    names.zip(averages)
   end
 
   def build_subject_data(leader)

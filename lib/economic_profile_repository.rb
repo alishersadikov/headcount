@@ -1,9 +1,9 @@
 require_relative '../lib/economic_profile'
-require_relative '../lib/scrubber'
+require_relative '../lib/cleaner'
 require_relative '../lib/data_extractor'
 
 class EconomicProfileRepository
-  include Scrubber
+  include Cleaner
   attr_reader :economic_profiles
 
   def initialize
@@ -55,7 +55,6 @@ class EconomicProfileRepository
   def fill_free_or_reduced_price_lunch(row)
     year = row[:timeframe].to_i
     attribute = :free_or_reduced_price_lunch
-    ep = find_by_name(row[:location])
     string = "Eligible for Free or Reduced Lunch"
     row[:poverty_level] == string ? percent_or_number(row,year,attribute) : nil
   end
@@ -79,7 +78,6 @@ class EconomicProfileRepository
   end
 
   def fill_free_or_reduced_price_lunch_with_number(row, year, attribute)
-    cleaned_data = truncate_number(row[:data].to_f)
     ep = find_by_name(row[:location])
     if ep.send(attribute)[year].nil?
       ep.send(attribute)[year] = {:total=>row[:data].to_i}

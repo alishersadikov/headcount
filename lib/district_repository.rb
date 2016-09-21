@@ -36,7 +36,9 @@ class DistrictRepository
   end
 
   def find_all_matching(snippet)
-    @districts.select { |key, value| value if key.include?(snippet.upcase) }.values
+    @districts.select do |key, value|
+      value if key.include?(snippet.upcase)
+    end.values
   end
 
   def link_enrollments_to_districts(name)
@@ -54,6 +56,7 @@ class DistrictRepository
   private
 
   def check_existence(name)
-    @districts[name.upcase] = District.new({ name: name }, self) if !find_by_name(name)
+    @districts[name.upcase] = District.new(
+                        { name: name }, self) if !find_by_name(name)
   end
 end

@@ -2,7 +2,6 @@ require_relative 'test_helper'
 require_relative '../lib/enrollment_repository'
 
 class EnrollmentRepositoryTest < Minitest::Test
-  attr_reader
 
 
   def test_it_loads_repository

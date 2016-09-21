@@ -1,6 +1,7 @@
 require_relative '../lib/errors'
 
 class StatewideTest
+
   GRADES   = [3, 8]
   SUBJECTS = [:math, :reading, :writing]
   RACES    =  [:asian, :black, :pacific_islander,

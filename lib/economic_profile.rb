@@ -1,8 +1,8 @@
-require_relative '../lib/scrubber'
+require_relative '../lib/cleaner'
 require_relative '../lib/errors'
 
 class EconomicProfile
-  include Scrubber
+  include Cleaner
   attr_reader :name,
               :median_household_income,
               :children_in_poverty,
