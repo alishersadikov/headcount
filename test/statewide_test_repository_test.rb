@@ -42,7 +42,7 @@ class StatewideTestRepositoryTest < Minitest::Test
     assert_equal "ACADEMY 20", found.name
   end
 
-  def test_it_finds_by_name_for_district_that_does_not_exist
+  def test_find_by_name_for_district_that_does_not_exist_returns_nil
     load_data
 
     refute str.find_by_name("blue valley")

@@ -1,18 +1,17 @@
 require_relative '../lib/errors'
 
 class StatewideTest
-
-  GRADES   = [3, 8]
-  SUBJECTS = [:math, :reading, :writing]
-  RACES    =  [:asian, :black, :pacific_islander,
-               :hispanic, :native_american, :two_or_more, :white]
-
   attr_reader   :name,
                 :third_grade,
                 :eighth_grade,
                 :math,
                 :reading,
                 :writing
+
+  GRADES   = [3, 8]
+  SUBJECTS = [:math, :reading, :writing]
+  RACES    =  [:asian, :black, :pacific_islander,
+               :hispanic, :native_american, :two_or_more, :white]
 
   def initialize(statewidetest_data)
     @name = statewidetest_data[:name].upcase

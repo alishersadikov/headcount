@@ -102,8 +102,10 @@ class EnrollmentTest < Minitest::Test
 
   def test_it_extracts_high_school_gradutation_data_in_year
     load_data
-    enrollment = er.find_by_name("ACADEMY 20")
+    enrollment_1 = er.find_by_name("ACADEMY 20")
+    enrollment_2 = er.find_by_name("ADAMS COUNTY 14")
 
-    assert_equal 0.895, enrollment.graduation_rate_in_year(2010)
+    assert_equal 0.895, enrollment_1.graduation_rate_in_year(2010)
+    assert_equal 0.659, enrollment_2.graduation_rate_in_year(2014)
   end
 end

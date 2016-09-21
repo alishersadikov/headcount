@@ -21,8 +21,8 @@ class DistrictRepository
   def load_data(file_tree)
     csv_files = DataExtractor.extract_data(file_tree[:enrollment])
     build_repo(csv_files[0])
-    @enrollments.load_data(file_tree)    if file_tree[:enrollment]
-    @statewidetests.load_data(file_tree) if file_tree[:statewide_testing]
+    @enrollments.load_data(file_tree)       if file_tree[:enrollment]
+    @statewidetests.load_data(file_tree)    if file_tree[:statewide_testing]
     @economic_profiles.load_data(file_tree) if file_tree[:economic_profile]
   end
 

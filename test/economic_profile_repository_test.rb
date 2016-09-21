@@ -63,9 +63,9 @@ class EconomicProfileRepositoryTest < Minitest::Test
     expected = {2014=>{:total=>3132, :percentage=>0.127}, 2012=>{:percentage=>0.125, :total=>3006},
                 2011=>{:total=>2834, :percentage=>0.119}, 2010=>{:percentage=>0.113, :total=>2601},
                 2009=>{:total=>2338, :percentage=>0.103}, 2013=>{:percentage=>0.131, :total=>3225},
-                2008=>{:total=>2058, :percentage=>0.093}, 2007=>{:percentage=>0.08, :total=>1630},
+                2008=>{:total=>2058, :percentage=>0.093}, 2007=>{:percentage=>0.08,  :total=>1630},
                 2006=>{:total=>1534, :percentage=>0.072}, 2005=>{:percentage=>0.058, :total=>1204},
-                2004=>{:total=>1182, :percentage=>0.059}, 2003=>{:percentage=>0.06, :total=>1062},
+                2004=>{:total=>1182, :percentage=>0.059}, 2003=>{:percentage=>0.06,  :total=>1062},
                 2002=>{:total=>905,  :percentage=>0.048}, 2001=>{:percentage=>0.047, :total=>855},
                 2000=>{:total=>701,  :percentage=>0.04}}
 

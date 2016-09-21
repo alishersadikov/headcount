@@ -4,8 +4,8 @@ require_relative '../lib/data_extractor'
 require_relative '../lib/cleaner'
 
 class StatewideTestRepository
-  include Cleaner
   attr_reader :statewidetests
+  include Cleaner
 
   def initialize
     @statewidetests = {}
@@ -39,7 +39,7 @@ class StatewideTestRepository
 
   def build_grade_and_test_hash(row, attribute)
     swt = find_by_name(row[:location])
-    score_or_race = row[:score] || row[:race_ethnicity] ||'blank'
+    score_or_race = row[:score] || row[:race_ethnicity] || 'blank'
     if !swt.send(attribute)[row[:timeframe].to_i].nil?
       fill_the_year_key(row, attribute, swt, score_or_race)
     else

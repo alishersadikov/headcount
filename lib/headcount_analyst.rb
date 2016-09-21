@@ -3,12 +3,10 @@ require_relative '../lib/cleaner'
 require_relative '../lib/errors'
 
 class HeadcountAnalyst
+  attr_reader :district_repo
+  include Cleaner
 
   GRADES   = [3, 8]
-  SUBJECTS = [:math, :reading, :writing]
-
-  include Cleaner
-  attr_reader :district_repo
 
   def initialize(district_repo)
     @district_repo = district_repo
