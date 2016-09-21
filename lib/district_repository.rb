@@ -19,11 +19,11 @@ class DistrictRepository
   end
 
   def load_data(file_tree)
-    # binding.pry
     csv_files = DataExtractor.extract_data(file_tree[:enrollment])
     build_repo(csv_files[0])
     @enrollments.load_data(file_tree)    if file_tree[:enrollment]
     @statewidetests.load_data(file_tree) if file_tree[:statewide_testing]
+    @economic_profiles.load_data(file_tree) if file_tree[:economic_profile]
   end
 
   def build_repo(csv_file)
@@ -36,7 +36,9 @@ class DistrictRepository
   end
 
   def find_all_matching(snippet)
-    @districts.select { |key, value| value if key.include?(snippet.upcase) }.values
+    @districts.select do |key, value|
+      value if key.include?(snippet.upcase)
+    end.values
   end
 
   def link_enrollments_to_districts(name)
@@ -54,6 +56,7 @@ class DistrictRepository
   private
 
   def check_existence(name)
-    @districts[name.upcase] = District.new({ name: name }, self) if !find_by_name(name)
+    @districts[name.upcase] = District.new(
+                        { name: name }, self) if !find_by_name(name)
   end
 end

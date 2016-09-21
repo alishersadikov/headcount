@@ -66,8 +66,8 @@ class EconomicProfileRepositoryTest < Minitest::Test
                 2008=>{:total=>2058, :percentage=>0.093}, 2007=>{:percentage=>0.08, :total=>1630},
                 2006=>{:total=>1534, :percentage=>0.072}, 2005=>{:percentage=>0.058, :total=>1204},
                 2004=>{:total=>1182, :percentage=>0.059}, 2003=>{:percentage=>0.06, :total=>1062},
-                2002=>{:total=>905, :percentage=>0.048}, 2001=>{:percentage=>0.047, :total=>855},
-                2000=>{:total=>701, :percentage=>0.04}}
+                2002=>{:total=>905,  :percentage=>0.048}, 2001=>{:percentage=>0.047, :total=>855},
+                2000=>{:total=>701,  :percentage=>0.04}}
 
     assert_equal expected, ep.free_or_reduced_price_lunch
   end

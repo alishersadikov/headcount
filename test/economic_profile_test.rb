@@ -14,7 +14,7 @@ class EconomicProfileTest < Minitest::Test
         :free_or_reduced_price_lunch => {2014 => {:percentage => 0.023, :total => 100}},
         :title_i => {2015 => 0.543},
         :name => "ACADEMY 20"
-        }
+       }
     end
 
     def test_all_attribtues_except_for_name_are_empty_hashes_if_no_data_given
@@ -61,6 +61,12 @@ class EconomicProfileTest < Minitest::Test
       assert_equal 55000, actual
     end
 
+    def test_median_household_income_in_year_raises_error_if_year_invalid
+      assert_raises(UnknownDataError) do
+        economic_profile.median_household_income_in_year(2016)
+      end
+    end
+
     def test_it_calculates_median_household_income_average
       actual = economic_profile.median_household_income_average
       assert_equal 55000, actual
@@ -69,6 +75,12 @@ class EconomicProfileTest < Minitest::Test
     def test_it_extracts_children_in_poverty_in_year
       actual = economic_profile.children_in_poverty_in_year(2012)
       assert_equal 0.184, actual
+    end
+
+    def test_children_in_poverty_in_year_raises_error_if_year_invalid
+      assert_raises(UnknownDataError) do
+        economic_profile.children_in_poverty_in_year(2016)
+      end
     end
 
     def test_it_extracts_free_or_reduced_price_lunch_percentage_in_year
@@ -81,8 +93,26 @@ class EconomicProfileTest < Minitest::Test
       assert_equal 100, actual
     end
 
+    def test_free_or_reduced_price_lunch_percentage_in_year_raises_error_if_year_invalid
+      assert_raises(UnknownDataError) do
+        economic_profile.free_or_reduced_price_lunch_percentage_in_year(2016)
+      end
+    end
+
+    def test_free_or_reduced_price_lunch_number_in_year_raises_error_if_year_invalid
+      assert_raises(UnknownDataError) do
+        economic_profile.free_or_reduced_price_lunch_number_in_year(2016)
+      end
+    end
+
     def test_it_extracts_title_i_data_in_year
       actual = economic_profile.title_i_in_year(2015)
       assert_equal 0.543, actual
+    end
+
+    def test_title_i_data_in_year_raises_error_if_year_invalid
+      assert_raises(UnknownDataError) do
+        economic_profile.title_i_in_year(2016)
+      end
     end
 end

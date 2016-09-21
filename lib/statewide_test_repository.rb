@@ -1,10 +1,10 @@
 require 'csv'
 require_relative '../lib/statewide_test'
 require_relative '../lib/data_extractor'
-require_relative '../lib/scrubber'
+require_relative '../lib/cleaner'
 
 class StatewideTestRepository
-  include Scrubber
+  include Cleaner
   attr_reader :statewidetests
 
   def initialize
