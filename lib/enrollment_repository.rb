@@ -4,8 +4,8 @@ require_relative '../lib/data_extractor'
 require_relative '../lib/cleaner'
 
 class EnrollmentRepository
-  include Cleaner
   attr_reader :enrollments
+  include Cleaner
 
   def initialize
     @enrollments = {}

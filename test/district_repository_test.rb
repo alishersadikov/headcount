@@ -33,7 +33,9 @@ class DistrictRepositoryTest < Minitest::Test
 
   def test_it_loads_the_repo_from_the_file
     assert dr.districts.empty?
+
     load_data
+
     refute dr.districts.empty?
   end
 

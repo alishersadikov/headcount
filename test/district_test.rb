@@ -18,6 +18,7 @@ class DistrictTest < Minitest::Test
 
   def test_district_repo_is_not_nil_after_data_is_loaded
     dr = DistrictRepository.new
+
     dr.load_data({
                     :enrollment => {
                       :kindergarten => "./data/Kindergartners in full-day program.csv",
@@ -48,6 +49,7 @@ class DistrictTest < Minitest::Test
 
   def test_relationship_between_district_and_statewidetest
     dr = DistrictRepository.new
+
     dr.load_data({
                     :enrollment => {
                       :kindergarten => "./data/Kindergartners in full-day program.csv",
