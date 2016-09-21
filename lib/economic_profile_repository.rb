@@ -23,11 +23,11 @@ class EconomicProfileRepository
 
   def build_economic_profiles(csv_objects)
     csv_objects[1].map do |row|
-    if find_by_name(row[:location])
-       fill_this_economic_profile(csv_objects, row)
-    else
-      create_new_economic_profile(csv_objects, row)
-    end
+      if find_by_name(row[:location])
+         fill_this_economic_profile(csv_objects, row)
+      else
+        create_new_economic_profile(csv_objects, row)
+      end
     end
   end
 
