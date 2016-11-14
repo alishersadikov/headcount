@@ -15,4 +15,4 @@ We'll build upon a dataset centered around schools in Colorado provided by the A
 
 ---
 
-Iterations 1-4 and 6 complete. All tests spec harness tests are passing. Iteration 5 spec harness test is not applicable, since we opted to complete 6 rather than 5. The output from rake sanitation:all shows zero complaints. The rake has zero failures. 
+Iterations 1-4 and 6 complete. All spec harness tests are passing. Iteration 5 spec harness test is not applicable, since we opted to complete 6 rather than 5. The output from rake sanitation:all shows zero complaints. The rake has zero failures. 
